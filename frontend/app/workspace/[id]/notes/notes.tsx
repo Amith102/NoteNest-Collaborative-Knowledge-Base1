@@ -18,6 +18,11 @@ const TITLE_MAX_LENGTH = 200;
 const CREATE_RESTRICTED_TITLE = "You need Editor or Admin role to create notes.";
 const DELETE_RESTRICTED_TITLE = "You need Editor or Admin role to delete notes.";
 
+interface ActiveUser {
+  userId: string;
+  name: string;
+}
+
 export default function WorkspaceNotesPage({ workspaceId }: { workspaceId: string }) {
   const searchParams = useSearchParams();
   const { activeWorkspace } = useWorkspace();
@@ -41,7 +46,7 @@ export default function WorkspaceNotesPage({ workspaceId }: { workspaceId: strin
   const [editContent, setEditContent] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [socket, setSocket] = useState<Socket | null>(null);
-  const [activeUsers, setActiveUsers] = useState<{ _id: string; name: string }[]>([]);
+  const [activeUsers, setActiveUsers] = useState<ActiveUser[]>([]);
   const createButtonRef = useRef<HTMLButtonElement>(null);
 
   // Load notes from API
