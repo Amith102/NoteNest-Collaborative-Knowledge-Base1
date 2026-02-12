@@ -12,6 +12,7 @@ import { requestLoggingMiddleware } from './middleware/logging';
 import { authenticateToken } from './middleware/auth';
 import { initializeCache, getCacheService, CacheKeys } from './services/cacheService';
 import { registerEventListeners } from './services/eventListeners';
+import { metrics } from './utils/metrics';
 
 dotenv.config();
 

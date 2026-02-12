@@ -1,4 +1,4 @@
-import logger from './logger';
+
 
 export interface MetricsData {
   cacheFailures: number;
@@ -43,6 +43,7 @@ class MetricsCollector {
       circuitBreakerCloses: 0,
       httpRequestFailures: 0,
       httpRequestTimeouts: 0,
+      eventBusFailures: 0,
     };
   }
 }

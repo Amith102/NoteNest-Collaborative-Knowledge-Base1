@@ -1,7 +1,7 @@
 import Redis from 'ioredis';
 import { CircuitBreaker, createCircuitBreaker, CircuitState } from '../utils/circuitBreaker';
 import { retryIdempotent } from '../utils/retry';
-import { metrics } from '../utils/metrics';
+import { metrics } from '../utils/metrics.ts';
 import logger from '../utils/logger';
 
 export class CacheService {

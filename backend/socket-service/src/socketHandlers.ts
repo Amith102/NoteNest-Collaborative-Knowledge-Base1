@@ -64,7 +64,7 @@ export default function setupSocketHandlers(io: SocketIOServer) {
         });
       } catch (error) {
         metrics.increment('httpRequestFailures');
-        if (error.name === 'AbortError') {
+        if (error instanceof Error && error.name === 'AbortError') {
           metrics.increment('httpRequestTimeouts');
           logger.warn('Workspace validation timeout');
         }
@@ -156,7 +156,7 @@ export default function setupSocketHandlers(io: SocketIOServer) {
         });
       } catch (error) {
         metrics.increment('httpRequestFailures');
-        if (error.name === 'AbortError') {
+        if (error instanceof Error && error.name === 'AbortError') {
           metrics.increment('httpRequestTimeouts');
           logger.warn('Note validation timeout');
         }

@@ -1,4 +1,5 @@
 import logger from '../utils/logger';
+import { metrics } from '../utils/metrics';
 
 export interface EventListener {
   (payload: any): Promise<void> | void;
