@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import { createServer } from "http";
 import jwt from 'jsonwebtoken';
 import workspaceRoutes from './routes/workspaces';
 import noteRoutes from './routes/notes';
