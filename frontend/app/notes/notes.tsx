@@ -23,33 +23,17 @@ function loadNotesFromStorage(): Note[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
-    const parsed = JSON.parse(raw) as unknown;
-    if (!Array.isArray(parsed)) return [];
-    return parsed.filter(
-      (n): n is Note =>
-        n != null &&
-        typeof n === "object" &&
-        typeof n.id === "number" &&
-        typeof n.title === "string"
-    );
+    return JSON.parse(raw);
   } catch {
     return [];
   }
 }
 
 function saveNotesToStorage(notes: Note[]) {
-  if (typeof window === "undefined") return;
-  try {
+  if (typeof window !== "undefined") {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
-  } catch {
-    // ignore
   }
 }
-
-const CREATE_RESTRICTED_TITLE =
-  "You need Editor or Admin role to create notes.";
-const DELETE_RESTRICTED_TITLE =
-  "You need Editor or Admin role to delete notes.";
 
 export default function NotesPage() {
   const searchParams = useSearchParams();
@@ -66,7 +50,6 @@ export default function NotesPage() {
   const [createSuccessMessage, setCreateSuccessMessage] =
     useState<string | null>(null);
 
-  const [viewingNote, setViewingNote] = useState<Note | null>(null);
   const createButtonRef = useRef<HTMLButtonElement>(null);
 
   /* ---------- Initial Load ---------- */
@@ -98,32 +81,6 @@ export default function NotesPage() {
   useEffect(() => {
     if (!isLoading) saveNotesToStorage(notes);
   }, [notes, isLoading]);
-
-  /* ---------- Retry Load ---------- */
-  const retryLoad = () => {
-    setLoadError(null);
-    setIsLoading(true);
-    setTimeout(() => {
-      setNotes(loadNotesFromStorage());
-      setIsLoading(false);
-    }, 600);
-  };
-
-  /* ---------- ?new=1 ---------- */
-  useEffect(() => {
-    if (searchParams.get("new") === "1" && canCreateNote) {
-      setShowCreateModal(true);
-      window.history.replaceState({}, "", window.location.pathname);
-    }
-  }, [searchParams, canCreateNote]);
-
-  /* ---------- Keyboard ---------- */
-  useEffect(() => {
-    if (!viewingNote) return;
-    const esc = () => setViewingNote(null);
-    window.addEventListener("shortcut-esc", esc);
-    return () => window.removeEventListener("shortcut-esc", esc);
-  }, [viewingNote]);
 
   /* ---------- Create Note ---------- */
   const handleCreateNote = useCallback(() => {
@@ -164,11 +121,6 @@ export default function NotesPage() {
     [createTitle, createContent]
   );
 
-  const handleDeleteNote = (id: number) => {
-    if (viewingNote?.id === id) setViewingNote(null);
-    setNotes((prev) => prev.filter((n) => n.id !== id));
-  };
-
   return (
     <div className="flex">
       <Sidebar />
@@ -181,29 +133,24 @@ export default function NotesPage() {
             canCreateNote ? (
               <button
                 ref={createButtonRef}
-                className="btn-primary"
+                type="button"
                 onClick={handleCreateNote}
+                className="btn-primary"
               >
                 Create Note
               </button>
-            ) : (
-              <span title={CREATE_RESTRICTED_TITLE}>Create Note</span>
-            )
+            ) : null
           }
         />
 
-        <main
-          className="flex-1 overflow-auto relative flex justify-center"
-          aria-busy={isLoading}
-          style={{
-            background: "var(--color-background)",
-            backgroundImage:
-              "linear-gradient(135deg, rgba(59, 130, 246, 0.02) 0%, rgba(139, 92, 246, 0.02) 100%)",
-          }}
-        >
-          <div className="max-w-3xl w-full p-6">
+        <main className="flex-1 overflow-auto" aria-busy={isLoading}>
+          <div className="max-w-3xl mx-auto p-6">
             {createSuccessMessage && (
-              <div className="mb-4 text-green-600 font-medium">
+              <div
+                role="status"
+                aria-live="polite"
+                className="mb-4 text-green-600 font-medium"
+              >
                 {createSuccessMessage}
               </div>
             )}
@@ -213,11 +160,6 @@ export default function NotesPage() {
                 title="Unable to load notes. Please try again."
                 message={loadError}
                 variant="error"
-                action={
-                  <button className="btn-primary" onClick={retryLoad}>
-                    Try again
-                  </button>
-                }
               />
             )}
 
@@ -234,8 +176,9 @@ export default function NotesPage() {
                 action={
                   canCreateNote && (
                     <button
-                      className="btn-primary"
+                      type="button"
                       onClick={handleCreateNote}
+                      className="btn-primary"
                     >
                       Create your first note
                     </button>
@@ -247,35 +190,12 @@ export default function NotesPage() {
                 {notes.map((note) => (
                   <li
                     key={note.id}
-                    className="rounded-xl border flex gap-4 p-4 bg-white shadow-sm group"
+                    className="rounded-xl border p-4 bg-white shadow-sm"
                   >
-                    <button
-                      type="button"
-                      onClick={() => setViewingNote(note)}
-                      className="flex-1 text-left"
-                      aria-label={`View note: ${note.title}`}
-                    >
-                      <h4 className="font-semibold truncate">{note.title}</h4>
-                      <p className="text-sm truncate mt-1">
-                        {note.content || "No content"}
-                      </p>
-                    </button>
-
-                    {canDeleteNote ? (
-                      <button
-                        className="btn-icon text-red-500"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteNote(note.id);
-                        }}
-                        title="Delete note"
-                        aria-label={`Delete ${note.title}`}
-                      >
-                        🗑
-                      </button>
-                    ) : (
-                      <span title={DELETE_RESTRICTED_TITLE}>🔒</span>
-                    )}
+                    <h4 className="font-semibold">{note.title}</h4>
+                    <p className="text-sm text-gray-600 mt-1">
+                      {note.content || "No content"}
+                    </p>
                   </li>
                 ))}
               </ul>
@@ -283,6 +203,56 @@ export default function NotesPage() {
           </div>
         </main>
       </div>
+
+      {/* Create Note Modal */}
+      {showCreateModal && canCreateNote && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded w-full max-w-md">
+            <h2 className="text-xl font-semibold mb-4">New note</h2>
+
+            <form onSubmit={handleSubmitCreate} noValidate>
+              <input
+                type="text"
+                value={createTitle}
+                onChange={(e) => {
+                  setCreateTitle(e.target.value);
+                  setCreateTitleError("");
+                }}
+                className="w-full border p-2 mb-2"
+                placeholder="Title"
+              />
+
+              {createTitleError && (
+                <p className="text-sm text-red-600 mb-2">
+                  {createTitleError}
+                </p>
+              )}
+
+              <textarea
+                value={createContent}
+                onChange={(e) => setCreateContent(e.target.value)}
+                className="w-full border p-2 mb-4"
+                placeholder="Content (optional)"
+              />
+
+              <div className="flex justify-end gap-3">
+                {/* ✅ REQUIRED FIX */}
+                <button
+                  type="button"
+                  onClick={() => setShowCreateModal(false)}
+                  className="btn-secondary"
+                >
+                  Cancel
+                </button>
+
+                <button type="submit" className="btn-primary">
+                  Create note
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
