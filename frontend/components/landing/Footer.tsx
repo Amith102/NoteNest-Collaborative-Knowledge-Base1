@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Github, Twitter, Linkedin, Heart } from "lucide-react";
-import { Section, Container, LayoutWrapper } from "@/components/ui";
+import { Container } from "@/components/ui/Container";
 
 // ============================================================================
 // Footer Component — Production Layout (locked from 1440px tuning session)
@@ -46,26 +46,17 @@ const LINK_COLUMNS = [
 const Footer = () => {
   return (
     <footer
-      className="bg-brand-dark text-brand-beige rounded-t-[3rem]"
-      style={{
-        paddingTop: '80px',     // footerPaddingY
-        paddingBottom: '80px',  // footerPaddingY
-        marginTop: '80px',      // footerMarginTop
-        transform: 'translateY(53px)', // footerY
-        transformOrigin: 'center center'
-      }}
+      className="bg-brand-dark text-brand-beige rounded-t-[3rem] pt-20 pb-20 mt-20 lg:translate-y-[53px] origin-center"
     >
       <Container>
         {/* Grid: gap 40px */}
-        <LayoutWrapper id="footer-grid" defaultY={0} defaultScale={1}>
+        <div>
           <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 mb-16"
-            style={{ gap: '40px' }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 mb-16 gap-10 lg:gap-[40px]"
           >
             {/* Brand Column — translate(30px, 0) */}
             <div
-              className="col-span-2 lg:col-span-2 space-y-6"
-              style={{ transform: 'translateX(30px)' }}
+              className="col-span-2 lg:col-span-2 space-y-6 lg:translate-x-[30px]"
             >
               <Link href="/" className="inline-block hover:opacity-80 transition-opacity">
                 <span className="text-3xl font-serif font-bold text-brand-beige">
@@ -90,8 +81,7 @@ const Footer = () => {
 
             {/* Links Columns — linksGap 40px */}
             <div
-              className="col-span-4 grid grid-cols-2 md:grid-cols-4"
-              style={{ gap: '40px' }}
+              className="col-span-4 grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-[40px]"
             >
               {LINK_COLUMNS.map((col) => (
                 <div key={col.title} className="space-y-4">
@@ -109,12 +99,11 @@ const Footer = () => {
               ))}
             </div>
           </div>
-        </LayoutWrapper>
+        </div>
 
         {/* Bottom Bar — translate(35px, 30px) */}
         <div
-          className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-brand-beige/40 font-medium"
-          style={{ transform: 'translate(35px, 30px)' }}
+          className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-brand-beige/40 font-medium lg:translate-x-[35px] lg:translate-y-[30px]"
         >
           <p>© 2026 NoteNest. Open Source Quest.</p>
           <div className="flex items-center gap-1">

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Section, LayoutWrapper } from "@/components/ui";
+import { Section } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import {
   FileText,
@@ -134,48 +134,42 @@ const features = [
   {
     title: "Rich Note Editor",
     description: "Structured documentation with Markdown support.",
-    className: "md:col-span-2 md:row-span-2",
-    style: { transform: 'translate(38px, 85px) scale(1.12)', transformOrigin: 'center center' },
+    className: "md:col-span-2 md:row-span-2 lg:translate-x-[38px] lg:translate-y-[55px] lg:scale-[1.12] origin-center",
     visual: <MockEditor />,
     icon: FileText
   },
   {
     title: "Team Workspaces",
     description: "Collaborative spaces for your team.",
-    className: "md:col-span-1 md:row-span-1",
-    style: { transform: 'translate(200px, 68px) scale(1.12) rotate(0deg)', transformOrigin: 'center center' },
+    className: "md:col-span-1 md:row-span-1 lg:translate-x-[85px] lg:translate-y-[40px] lg:scale-[1.12] origin-center",
     visual: <AvatarStack />,
     icon: Users
   },
   {
     title: "Role-Based Access",
     description: "Fine-grained permissions.",
-    className: "md:col-span-1 md:row-span-1",
-    style: { transform: 'translate(200px, 60px) scale(1.12)', transformOrigin: 'center center' },
+    className: "md:col-span-1 md:row-span-1 lg:translate-x-[85px] lg:translate-y-[0px] lg:scale-[1.12] origin-center",
     visual: <BadgeUI />,
     icon: Shield
   },
   {
     title: "Fast Search",
     description: "Find notes quickly with powerful navigation.",
-    className: "md:col-span-1 md:row-span-1",
-    style: { transform: 'translate(25px, 187px) scale(1.12)', transformOrigin: 'center center' },
+    className: "md:col-span-1 md:row-span-1 lg:translate-x-[40px] lg:-translate-y-[-110px] lg:scale-[1.12] origin-center",
     visual: <SearchBarAnim />,
     icon: Search
   },
   {
     title: "Organization",
     description: "Folders and tags to keep notes organized.",
-    className: "md:col-span-1 md:row-span-2",
-    style: { transform: 'translate(108px, 185px) scale(1.12)', transformOrigin: 'center center' },
+    className: "md:col-span-1 md:row-span-2 lg:translate-x-[115px] lg:-translate-y-[-110px] lg:scale-[1.12] origin-center",
     visual: <FolderTree />,
     icon: Layout
   },
   {
     title: "Scalable Backend",
     description: "Built for performance and growth.",
-    className: "md:col-span-1 md:row-span-1",
-    style: { transform: 'translate(200px, 60px) scale(1.12)', transformOrigin: 'center center' },
+    className: "md:col-span-1 md:row-span-1 lg:translate-x-[85px] lg:-translate-y-[55px] lg:scale-[1.12] origin-center",
     visual: <ServerGraph />,
     icon: Server
   },
@@ -189,7 +183,6 @@ const FeatureCard = ({ feature, index }: { feature: any, index: number }) => (
     transition={{ delay: index * 0.05, duration: 0.5 }}
     whileHover={{ y: -5, boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)" }}
     className={`group relative flex flex-col overflow-hidden rounded-[2rem] bg-white border border-black/5 shadow-sm transition-all duration-300 ${feature.className}`}
-    style={feature.style}
   >
     {/* Content */}
     <div className="p-6 md:p-8 flex flex-col h-full relative z-10">
@@ -202,25 +195,17 @@ const FeatureCard = ({ feature, index }: { feature: any, index: number }) => (
         </div>
       </div>
 
-      <LayoutWrapper
-        id={`feature-${index}-title`}
-        className="mb-2"
-        defaultX={index === 0 ? 20 : 0}
-      >
+      <div className="mb-2">
         <h3 className="text-xl font-serif font-bold text-[#1A1A1A]">
           {feature.title}
         </h3>
-      </LayoutWrapper>
+      </div>
 
-      <LayoutWrapper
-        id={`feature-${index}-desc`}
-        className="mb-6"
-        defaultX={index === 0 ? 20 : 0}
-      >
+      <div className="mb-6">
         <p className="text-sm text-[#1A1A1A]/60 font-medium">
           {feature.description}
         </p>
-      </LayoutWrapper>
+      </div>
 
       {/* Visual Container */}
       <div className="flex-1 w-full relative min-h-[120px] rounded-xl bg-[#F9F9F9] border border-black/5 overflow-hidden group-hover:border-black/10 transition-colors">
@@ -248,13 +233,12 @@ const ArrowUpRightIcon = ({ className }: { className?: string }) => (
 
 const Features = () => {
   return (
-    <section id="features" className="py-20 bg-[#F3F0E6] relative overflow-hidden" style={{ transform: 'translateY(-66px)' }}>
+    <section id="features" className="py-20 bg-[#F3F0E6] relative overflow-hidden lg:-translate-y-[66px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
         <div
-          className="max-w-3xl mb-16"
-          style={{ transform: 'translate(34px, 20px) scale(1.06)', transformOrigin: 'top left' }}
+          className="max-w-3xl mb-16 lg:translate-x-[34px] lg:translate-y-[20px] lg:scale-[1.06] origin-top-left text-left"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -281,36 +265,11 @@ const Features = () => {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[minmax(200px,auto)] gap-[20px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[minmax(200px,auto)] gap-[20px] lg:gap-[80px]">
           {features.map((feature, index) => {
-            // Extract transform values from feature.style if present
-            // Format: translate(38px, 55px) scale(1.12)
-            // This is a rough extraction for default values
-            let defaultX = 0, defaultY = 0, defaultScale = 1;
-            if (feature.style?.transform) {
-              const t = feature.style.transform;
-              const translateMatch = t.match(/translate\(([^,]+)px,\s*([^,]+)px\)/);
-              const scaleMatch = t.match(/scale\(([^)]+)\)/);
-              if (translateMatch) {
-                defaultX = parseFloat(translateMatch[1]);
-                defaultY = parseFloat(translateMatch[2]);
-              }
-              if (scaleMatch) {
-                defaultScale = parseFloat(scaleMatch[1]);
-              }
-            }
-
             return (
               <div key={feature.title} className={cn("md:transform-gpu", feature.className)}>
-                <LayoutWrapper
-                  id={`feature-${index}`}
-                  defaultX={defaultX}
-                  defaultY={defaultY}
-                  defaultScale={defaultScale}
-                  style={{ transformOrigin: 'center center' }}
-                >
-                  <FeatureCard feature={feature} index={index} />
-                </LayoutWrapper>
+                <FeatureCard feature={feature} index={index} />
               </div>
             );
           })}

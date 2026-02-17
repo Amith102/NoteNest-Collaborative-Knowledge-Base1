@@ -1,4 +1,4 @@
-"use client";
+import { ResponsiveScaler } from "@/components/ui/ResponsiveScaler";
 
 import Navbar from "@/components/landing/Navbar";
 import Hero from "@/components/landing/Hero";
@@ -19,13 +19,15 @@ export default function Home() {
     // Note: A large block of duplicated legacy JSX code was removed here to fix a syntax error.
     // The previous implementation had inadvertently pasted the entire file content again.
     <main className="min-h-screen bg-brand-beige selection:bg-brand-accent/20">
-      <Navbar />
-      <Hero />
-      <Features />
-      <SocialProof />
-      <BestPractices />
-      <FAQ />
-      <Footer />
+      <ResponsiveScaler>
+        <Navbar />
+        <Hero />
+        <Features />
+        <SocialProof />
+        <BestPractices />
+        <FAQ />
+        <Footer />
+      </ResponsiveScaler>
 
       {/* 
         Legacy sections commented out to focus on the new Design Request.

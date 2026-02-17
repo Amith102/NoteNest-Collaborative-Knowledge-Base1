@@ -83,7 +83,7 @@ const Hero = () => {
               </motion.div>
 
               {/* Social proof — socialY: 20px → extra mt-5 on top of existing mt-16 = mt-[84px] */}
-              <div className="mt-[84px] flex items-center justify-center lg:justify-start gap-4">
+              <div className="mt-16 lg:mt-[84px] flex items-center justify-center lg:justify-start gap-4">
                 <div className="flex -space-x-4">
                   {[1, 2, 3, 4].map((i) => (
                     <div key={i} className="w-12 h-12 rounded-full border-4 border-brand-beige bg-gray-200 flex items-center justify-center text-xs font-bold bg-white text-black shadow-md relative z-0 hover:z-10 hover:scale-110 transition-transform">
@@ -107,8 +107,7 @@ const Hero = () => {
             {/* Card 1: Real-time Collab (Top Right) - Desktop Only */}
             {/* card1Scale: 3 → scale(3) */}
             <div
-              className="row-start-1 col-start-2 place-self-center hidden lg:block z-20"
-              style={{ transform: 'scale(3)', transformOrigin: 'center center' }}
+              className="row-start-1 col-start-2 place-self-center hidden lg:block z-20 lg:scale-[3] origin-center"
             >
               <FloatingCard
                 className="w-[18rem] bg-[#FDFBF7] p-8 text-brand-dark"
@@ -124,8 +123,7 @@ const Hero = () => {
                 </div>
                 {/* card1TextX: 10px */}
                 <h3
-                  className="text-3xl font-serif font-bold mb-4 leading-none"
-                  style={{ transform: 'translateX(10px)' }}
+                  className="text-3xl font-serif font-bold mb-4 leading-none lg:translate-x-[10px]"
                 >Real-time<br />Collab</h3>
                 <div className="flex gap-2">
                   <button className="w-10 h-10 rounded-full bg-brand-dark text-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg">+</button>
@@ -137,8 +135,7 @@ const Hero = () => {
             {/* Card 2: Syncing (Center) - Tablet & Desktop */}
             {/* card2Scale: 2 → scale(2) */}
             <div
-              className="row-start-2 col-span-2 place-self-center z-30"
-              style={{ transform: 'scale(2)', transformOrigin: 'center center' }}
+              className="row-start-2 col-span-2 place-self-center z-30 lg:scale-[2] origin-center"
             >
               <FloatingCard
                 className="p-0 border-none bg-transparent shadow-none"
@@ -146,8 +143,7 @@ const Hero = () => {
               >
                 {/* card2TextY: -10px */}
                 <div
-                  className="inline-block px-8 py-4 border-4 border-brand-dark rounded-[2rem_1rem_2rem_0.5rem] font-handwritten font-bold transform -rotate-1 hover:rotate-0 transition-transform cursor-cell bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
-                  style={{ transform: 'translateY(-10px) rotate(-1deg)' }}
+                  className="inline-block px-8 py-4 border-4 border-brand-dark rounded-[2rem_1rem_2rem_0.5rem] font-handwritten font-bold transform -rotate-1 hover:rotate-0 transition-transform cursor-cell bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] lg:-translate-y-[10px]"
                 >
                   Syncing...
                 </div>
@@ -157,8 +153,7 @@ const Hero = () => {
             {/* Card 3: My Notes (Bottom Left) - Tablet & Desktop */}
             {/* card3Scale: 2, width: 358px (changed from 256px) */}
             <div
-              className="row-start-3 col-start-1 place-self-center lg:place-self-start z-20"
-              style={{ transform: 'scale(2)', transformOrigin: 'center center' }}
+              className="row-start-3 col-start-1 place-self-center lg:place-self-start z-20 lg:scale-[2] origin-center"
             >
               <FloatingCard
                 className="w-[358px] min-h-[200px] bg-[#0F0F0F] text-white py-10 px-8 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)] border-none"
@@ -168,7 +163,7 @@ const Hero = () => {
               >
                 <div className="flex justify-between items-start mb-6">
                   {/* card3TextX: 20, card3TextY: 20 */}
-                  <div style={{ transform: 'translate(20px, 20px)' }}>
+                  <div className="lg:translate-x-[20px] lg:translate-y-[20px]">
                     <h3 className="text-2xl font-serif mb-1 tracking-tight">My Notes</h3>
                   </div>
                   <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">::</div>
@@ -176,20 +171,18 @@ const Hero = () => {
                 <div className="grid grid-cols-2 gap-4">
                   {/* Sub-card 1: Plan for The Day — card3Sub1Y: 50px, textX: 5px */}
                   <div
-                    className="bg-brand-accent text-brand-dark p-5 rounded-[1rem] flex flex-col gap-3"
-                    style={{ transform: 'translateY(50px)' }}
+                    className="bg-brand-accent text-brand-dark p-5 rounded-[1rem] flex flex-col gap-3 lg:translate-y-[50px]"
                   >
-                    <div style={{ transform: 'translateX(5px)' }}>
+                    <div className="lg:translate-x-[5px]">
                       <div className="font-bold text-base leading-snug">Plan for<br />The Day</div>
                       <div className="flex items-center gap-1.5 text-xs font-bold mt-3"><div className="w-4 h-8 rounded-full bg-brand-dark/20 flex items-center justify-center text-[10px]">✓</div> Gym</div>
                     </div>
                   </div>
                   {/* Sub-card 2: Ideas — card3Sub2Y: 50px, textX: 5px */}
                   <div
-                    className="bg-brand-yellow text-brand-dark p-5 rounded-[1rem] relative overflow-hidden"
-                    style={{ transform: 'translateY(50px)' }}
+                    className="bg-brand-yellow text-brand-dark p-5 rounded-[1rem] relative overflow-hidden lg:translate-y-[50px]"
                   >
-                    <div style={{ transform: 'translateX(5px)' }}>
+                    <div className="lg:translate-x-[5px]">
                       <div className="font-bold text-base mb-2">Ideas</div>
                     </div>
                     <div className="absolute bottom-0 right-0 w-12 h-12 bg-brand-dark rounded-tl-[1rem] flex items-center justify-center">

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Users, Sparkles, Zap } from "lucide-react";
-import { Section, Container, LayoutWrapper } from "@/components/ui";
+import { Section, Container } from "@/components/ui";
 
 
 // SocialProof Component — Production Layout (locked from 1440px tuning session)
@@ -34,8 +34,7 @@ const SocialProof = () => {
       <Container>
         {/* Header — headerY: -25px, headerScale: 1.12 */}
         <div
-          className="text-center mb-10"
-          style={{ transform: 'translateY(-25px) scale(1.12)', transformOrigin: 'center center' }}
+          className="text-center mb-10 lg:-translate-y-[25px] lg:scale-[1.12] origin-center"
         >
           <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">
             Trusted by innovative teams worldwide
@@ -44,27 +43,24 @@ const SocialProof = () => {
 
         {/* Logo Ticker — tickerGap: 96px */}
         <Container>
-          <LayoutWrapper id="social-proof-content" defaultY={0}>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
-              <p className="text-xl md:text-2xl font-serif font-bold text-center md:text-left text-brand-dark/80">
-                Trusted by teams at
-              </p>
-              <div className="flex flex-wrap justify-center gap-8 md:gap-12 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-                {/* Mock Logos */}
-                {['Acme Corp', 'GlobalTech', 'Nebula', 'Circle', 'FoxRun'].map((company) => (
-                  <span key={company} className="text-xl md:text-2xl font-bold font-serif text-brand-dark">
-                    {company}
-                  </span>
-                ))}
-              </div>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+            <p className="text-xl md:text-2xl font-serif font-bold text-center md:text-left text-brand-dark/80">
+              Trusted by teams at
+            </p>
+            <div className="flex flex-wrap justify-center gap-8 md:gap-12 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+              {/* Mock Logos */}
+              {['Acme Corp', 'GlobalTech', 'Nebula', 'Circle', 'FoxRun'].map((company) => (
+                <span key={company} className="text-xl md:text-2xl font-bold font-serif text-brand-dark">
+                  {company}
+                </span>
+              ))}
             </div>
-          </LayoutWrapper>
+          </div>
         </Container>
 
         {/* Stats Grid — statsGap: 32px */}
         <div
-          className="grid md:grid-cols-3 mt-20 border-t border-black/5 pt-12"
-          style={{ gap: '32px' }}
+          className="grid md:grid-cols-3 mt-20 border-t border-black/5 pt-12 gap-8 lg:gap-[32px]"
         >
           {STATS.map((stat, i) => (
             <div key={i}>
