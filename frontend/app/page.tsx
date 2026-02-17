@@ -15,6 +15,12 @@ export default function Home() {
   // Hook commented out as it was part of the legacy implementation
   // const { isAuthenticated } = useUserRole();
 
+export const metadata = {
+  title: "NoteNest - Collaborative Knowledge Base for Teams",
+  description: "NoteNest is an open-source, team-based knowledge base that allows users to create, organize, and collaborate on notes and documentation in real time.",
+};
+
+export default function Home() {
   return (
     // Note: A large block of duplicated legacy JSX code was removed here to fix a syntax error.
     // The previous implementation had inadvertently pasted the entire file content again.
@@ -37,6 +43,14 @@ export default function Home() {
       {/* <section id="features" className="py-20 bg-gray-50">...</section> */}
       {/* <section className="py-20 bg-blue-600 text-gray-200"">...</section> */}
       {/* <footer className="bg-gray-900 text-gray-200" py-12">...</footer> */}
+    <main className="min-h-screen bg-[#F3F0E6]">
+      <Navbar />
+      <Hero />
+      <Features />
+      <SocialProof />
+      <BestPractices />
+      <FAQ />
+      <Footer />
     </main>
   );
 }
