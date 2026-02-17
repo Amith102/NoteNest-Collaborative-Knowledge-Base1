@@ -134,21 +134,21 @@ const features = [
   {
     title: "Rich Note Editor",
     description: "Structured documentation with Markdown support.",
-    className: "md:col-span-2 md:row-span-2 lg:translate-x-[38px] lg:translate-y-[55px] lg:scale-[1.12] origin-center",
+    className: "md:col-span-2 md:row-span-2 lg:translate-x-[65px] lg:translate-y-[55px] lg:scale-[1.12] origin-center",
     visual: <MockEditor />,
     icon: FileText
   },
   {
     title: "Team Workspaces",
     description: "Collaborative spaces for your team.",
-    className: "md:col-span-1 md:row-span-1 lg:translate-x-[85px] lg:translate-y-[40px] lg:scale-[1.12] origin-center",
+    className: "md:col-span-1 md:row-span-1 lg:translate-x-[120px] lg:translate-y-[40px] lg:scale-[1.12] origin-center",
     visual: <AvatarStack />,
     icon: Users
   },
   {
     title: "Role-Based Access",
     description: "Fine-grained permissions.",
-    className: "md:col-span-1 md:row-span-1 lg:translate-x-[85px] lg:translate-y-[0px] lg:scale-[1.12] origin-center",
+    className: "md:col-span-1 md:row-span-1 lg:translate-x-[120px] lg:translate-y-[0px] lg:scale-[1.12] origin-center",
     visual: <BadgeUI />,
     icon: Shield
   },
@@ -169,7 +169,7 @@ const features = [
   {
     title: "Scalable Backend",
     description: "Built for performance and growth.",
-    className: "md:col-span-1 md:row-span-1 lg:translate-x-[85px] lg:-translate-y-[55px] lg:scale-[1.12] origin-center",
+    className: "md:col-span-1 md:row-span-1 lg:translate-x-[120px] lg:-translate-y-[55px] lg:scale-[1.12] origin-center",
     visual: <ServerGraph />,
     icon: Server
   },
